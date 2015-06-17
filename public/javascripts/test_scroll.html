@@ -1,0 +1,448 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
+    <meta name="renderer" content="webkit">
+    <script type="text/javascript" src="jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="simplePageScroll.js"></script>
+    <!--鼠标滚轮mousewheel插件，我直接将插件代码直接粘这里了，要不没地方单独放这个文件-->
+    <script>
+        ! function(a) {
+            "function" == typeof define && define.amd ? define(["jquery"], a) : "object" == typeof exports ? module.exports = a : a(jQuery)
+        }(function(a) {
+            function b(b) {
+                var g = b || window.event,
+                    h = i.call(arguments, 1),
+                    j = 0,
+                    l = 0,
+                    m = 0,
+                    n = 0,
+                    o = 0,
+                    p = 0;
+                if (b = a.event.fix(g), b.type = "mousewheel", "detail" in g && (m = -1 * g.detail), "wheelDelta" in g && (m = g.wheelDelta), "wheelDeltaY" in g && (m = g.wheelDeltaY), "wheelDeltaX" in g && (l = -1 * g.wheelDeltaX), "axis" in g && g.axis === g.HORIZONTAL_AXIS && (l = -1 * m, m = 0), j = 0 === m ? l : m, "deltaY" in g && (m = -1 * g.deltaY, j = m), "deltaX" in g && (l = g.deltaX, 0 === m && (j = -1 * l)), 0 !== m || 0 !== l) {
+                    if (1 === g.deltaMode) {
+                        var q = a.data(this, "mousewheel-line-height");
+                        j *= q, m *= q, l *= q
+                    } else if (2 === g.deltaMode) {
+                        var r = a.data(this, "mousewheel-page-height");
+                        j *= r, m *= r, l *= r
+                    }
+                    if (n = Math.max(Math.abs(m), Math.abs(l)), (!f || f > n) && (f = n, d(g, n) && (f /= 40)), d(g, n) && (j /= 40, l /= 40, m /= 40), j = Math[j >= 1 ? "floor" : "ceil"](j / f), l = Math[l >= 1 ? "floor" : "ceil"](l / f), m = Math[m >= 1 ? "floor" : "ceil"](m / f), k.settings.normalizeOffset && this.getBoundingClientRect) {
+                        var s = this.getBoundingClientRect();
+                        o = b.clientX - s.left, p = b.clientY - s.top
+                    }
+                    return b.deltaX = l, b.deltaY = m, b.deltaFactor = f, b.offsetX = o, b.offsetY = p, b.deltaMode = 0, h.unshift(b, j, l, m), e && clearTimeout(e), e = setTimeout(c, 200), (a.event.dispatch || a.event.handle).apply(this, h)
+                }
+            }
+
+            function c() {
+                f = null
+            }
+
+            function d(a, b) {
+                return k.settings.adjustOldDeltas && "mousewheel" === a.type && b % 120 === 0
+            }
+            var e, f, g = ["wheel", "mousewheel", "DOMMouseScroll", "MozMousePixelScroll"],
+                h = "onwheel" in document || document.documentMode >= 9 ? ["wheel"] : ["mousewheel", "DomMouseScroll", "MozMousePixelScroll"],
+                i = Array.prototype.slice;
+            if (a.event.fixHooks)
+                for (var j = g.length; j;)
+                    a.event.fixHooks[g[--j]] = a.event.mouseHooks;
+            var k = a.event.special.mousewheel = {
+                version: "3.1.12",
+                setup: function() {
+                    if (this.addEventListener)
+                        for (var c = h.length; c;) this.addEventListener(h[--c], b, !1);
+                    else this.onmousewheel = b;
+                    a.data(this, "mousewheel-line-height", k.getLineHeight(this)), a.data(this, "mousewheel-page-height", k.getPageHeight(this))
+                },
+                teardown: function() {
+                    if (this.removeEventListener)
+                        for (var c = h.length; c;) this.removeEventListener(h[--c], b, !1);
+                    else this.onmousewheel = null;
+                    a.removeData(this, "mousewheel-line-height"), a.removeData(this, "mousewheel-page-height")
+                },
+                getLineHeight: function(b) {
+                    var c = a(b),
+                        d = c["offsetParent" in a.fn ? "offsetParent" : "parent"]();
+                    return d.length || (d = a("body")), parseInt(d.css("fontSize"), 10) || parseInt(c.css("fontSize"), 10) || 16
+                },
+                getPageHeight: function(b) {
+                    return a(b).height()
+                },
+                settings: {
+                    adjustOldDeltas: !0,
+                    normalizeOffset: !0
+                }
+            };
+            a.fn.extend({
+                mousewheel: function(a) {
+                    return a ? this.bind("mousewheel", a) : this.trigger("mousewheel")
+                },
+                unmousewheel: function(a) {
+                    return this.unbind("mousewheel", a)
+                }
+            })
+        });
+    </script>
+    <style type="text/css">
+    
+      body {
+          color: #222;
+          -webkit-text-size-adjust: none;
+      }
+      
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      hr,
+      p,
+      blockquote,
+      dl,
+      dt,
+      dd,
+      ul,
+      ol,
+      li,
+      pre,
+      form,
+      fieldset,
+      legend,
+      button,
+      input,
+      textarea,
+      th,
+      td,
+      iframe {
+          margin: 0;
+          padding: 0;
+      }
+      
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+          font-size: 100%;
+      }
+      
+      body,
+      button,
+      input,
+      select,
+      textarea {
+          font-family: Tahoma, Arial, Roboto, ”Droid Sans”, ”Helvetica Neue”, ”Droid Sans Fallback”, ”Heiti SC”, sans-self;
+          font-size: 62.5%;
+          line-height: 1.5;
+      }
+      
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+          font-size: 100%;
+          font-weight: normal;
+      }
+      
+      fieldset,
+      img {
+          border: 0;
+          display: inline-block;
+      }
+      
+      address,
+      caption,
+      cite,
+      dfn,
+      em,
+      th,
+      var {
+          font-style: normal;
+          font-weight: normal;
+      }
+      
+      article,
+      aside,
+      details,
+      figcaption,
+      figure,
+      footer,
+      header,
+      hgroup,
+      menu,
+      nav,
+      section,
+      summary,
+      time,
+      mark,
+      audio,
+      video {
+          display: block;
+          margin: 0;
+          padding: 0;
+      }
+      /* HTML5 */
+      
+      code,
+      kbd,
+      pre,
+      samp {
+          font-family: courier new, courier, monospace
+      }
+      
+      ol,
+      ul {
+          list-style: none;
+      }
+      
+      a {
+          text-decoration: none;
+          color: #222;
+      }
+      
+      a:hover {
+          color: #000;
+          text-decoration: none;
+          zoom: 1
+      }
+      
+      a:active {
+          color: #666;
+      }
+      
+      sup {
+          vertical-align: text-top;
+      }
+      
+      sub {
+          vertical-align: text-bottom;
+      }
+      
+      input,
+      select,
+      button {
+          vertical-align: baseline;
+          *vertical-align: middle;
+          font-family: tahoma, \5b8b\4f53, arial;
+          font-size: 100%;
+      }
+      
+      input[type=checkbox],
+      input[type=radio] {
+          vertical-align: middle;
+          margin: 0 5px;
+      }
+      
+      input[type="text"],
+      input[type="password"],
+      textarea {
+          outline-style: none;
+          -webkit-appearance: none;
+      }
+      
+      textarea {
+          resize: none;
+      }
+      
+      textarea {
+          overflow: auto;
+          font: 100% tahoma, \5b8b\4f53, arial;
+      }
+      
+      table {
+          border-collapse: collapse;
+          border-spacing: 0;
+      }
+      /*===reset end===*/
+      
+      html,
+      body {
+          width: 100%;
+          height: 100%;
+          overflow: hidden;
+      }
+      
+      #slideContainer {
+          width: 100%;
+          height: 100%;
+          overflow: visible;
+          transition: transform 1s cubic-bezier(0.86, 0, 0.03, 1);
+          -webkit-transition: -webkit-transform 1s cubic-bezier(0.86, 0, 0.03, 1);
+          -ms-transition: -ms-transform 1s cubic-bezier(0.86, 0, 0.03, 1);
+          -moz-transition: -moz-transform 1s cubic-bezier(0.86, 0, 0.03, 1);
+          -o-transition: -o-transform 1s cubic-bezier(0.86, 0, 0.03, 1);
+      }
+      
+      #slideContainer .slide {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          background-position: center center;
+          background-repeat: no-repeat;
+      }
+      
+      #slideContainer .slide .title {
+          padding: 150px 0 0 50px;
+          color: #44f;
+          font-size: 40px;
+          text-align: center;
+          font-family: "Microsoft YaHei";
+      }
+      
+      
+      
+      #slideContainer .slide-1 {
+          background-color: #0066a5
+      }
+      
+      #slideContainer .slide-2 {
+          background-color: #065E69
+      }
+      
+      #slideContainer .slide-3 {
+          background-color: #0D2C7C
+      }
+      
+      #slideContainer .slide-4 {
+          background-color: #0C6242
+      }
+      
+      #slideContainer .slide-5 {
+          background-color: #413004
+      }
+      
+      
+      #slide-btn {
+          position: fixed;
+          right: 40px;
+          top: 50%;
+          width: 14px;
+      }
+      
+      #slide-btn li {
+          margin-bottom: 15px;
+          background: #069052;
+          text-align: center;
+          color: #fff;
+          cursor: pointer;
+      }
+      
+      
+      @keyframes go-btn {
+          %0, %100 {
+              bottom: 10px;
+              opacity: 1;
+          }
+          50% {
+              bottom: 50px;
+              opacity: .5
+          }
+      }
+      
+      @-webkit-keyframes go-btn {
+          %0, %100 {
+              bottom: 10px;
+              opacity: 1;
+          }
+          50% {
+              bottom: 50px;
+              opacity: .5
+          }
+      }
+      
+      @-ms-keyframes go-btn {
+          %0, %100 {
+              bottom: 10px;
+              opacity: 1;
+          }
+          50% {
+              bottom: 50px;
+              opacity: .5
+          }
+      }
+      
+      @-moz-keyframes go-btn {
+          %0, %100 {
+              bottom: 10px;
+              opacity: 1;
+          }
+          50% {
+              bottom: 50px;
+              opacity: .5
+          }
+      }
+      
+      @-o-keyframes go-btn {
+          %0, %100 {
+              bottom: 10px;
+              opacity: 1;
+          }
+          50% {
+              bottom: 50px;
+              opacity: .5
+          }
+      }
+    </style>
+</head>
+
+<body>
+    <div id="slideContainer">
+        <div class="slide slide-1">
+            <div class="title active">
+                <p class="p-1">点右边的按钮,底部的按钮，滚动鼠标滚轮,按下键盘方向上下键查看效果</p>
+                <p class="p-2">Just the way u are!</p>
+            </div>
+        </div>
+        <div class="slide slide-2" data-slideanimation="tellme">
+            <div class="title">
+                <p class="p-1">无论我们距离有多远，我都永远by your side!</p>
+                <p class="p-2">I am just kidding!</p>
+            </div>
+        </div>
+        <div class="slide slide-3">
+            <div class="title">
+                <p class="p-1">I will never say never</p>
+                <p class="p-2">From justin bieber</p>
+            </div>
+        </div>
+        <div class="slide slide-4">
+            <div class="title">
+                <p class="p-1">you are just like a angel</p>
+                <p class="p-2">I tell you seriously</p>
+            </div>
+        </div>
+        <div class="slide slide-5">
+            <div class="title">
+                <p class="p-1">life sucks sometime somehow</p>
+                <p class="p-2">I feel that</p>
+            </div>
+        </div>
+    </div>
+    <ul id="slide-btn">
+        <li class="cur">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</body>
+<script>
+var tellme = function(){
+    console.log("hello");
+};
+$("#slideContainer").simplePageScroll({
+   pageSelectorID:"slide-btn",
+   loop:true
+});
+</script>
+
+</html>

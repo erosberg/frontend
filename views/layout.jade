@@ -5,7 +5,6 @@ html(lang="zh-cmn-Hans")
     meta(http-equiv="x-ua-compatible", content="ie=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1")
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
     link(rel="apple-touch-icon", sizes="57x57", href="/apple-icon-57x57.png")
     link(rel="apple-touch-icon", sizes="60x60", href="/apple-icon-60x60.png")
     link(rel="apple-touch-icon", sizes="72x72", href="/apple-icon-72x72.png")
@@ -24,6 +23,12 @@ html(lang="zh-cmn-Hans")
     meta(name="msapplication-TileImage", content="/ms-icon-144x144.png")
     meta(name="theme-color", content="#ffffff")
     meta(name='author', content='Shen DENG')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    //link(rel='stylesheet', href='/stylesheets/onepage-scroll.css')
+    
   body
     include navbar.jade
     block content
+    script(type="text/javascript" src="http://code.jquery.com/jquery-1.11.0.js")
+    script(type="text/javascript" src="/javascripts/simplePageScroll.js")
+      
