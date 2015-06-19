@@ -9,6 +9,7 @@
     };
 
     $.fn.simplePageScroll = function(options) {
+        console.log(options);
         if (options.slideTagName && options.slideTagName.charAt(0) !== ".") {
             options.slideTagName = "." + options.slideTagName;
         }
@@ -16,11 +17,10 @@
             options.slideContainer = "#" + options.slideContainer;
         }
         var settings = $.extend({}, defaults, options),
-            slides = $(settings.slideTagName)
-        maxSlide = slides.length - 1,
+            slides = $(settings.slideTagName),
+            maxSlide = slides.length - 1,
             slideIndex = 0,
             slideContainer = $("#slideContainer");
-        console.log(maxSlide);
         /*page selector events*/
         if (settings.pageSelectorID) {
             if (settings.pageSelectorID.charAt(0) !== "#") {
@@ -29,7 +29,6 @@
             var hasPageSelector = true,
                 pageSelectors = $(settings.pageSelectorID + " li")
             if (pageSelectors.length !== (maxSlide + 1)) {
-                console.log(pageSelectors.length);
                 console.log("page selector size different with slide numbers")
             }
             pageSelectors.each(function(index) {
@@ -40,14 +39,34 @@
             });
         }
         /*mouse wheel scroll event*/
-        slideContainer.one("mousewheel", mouseMove);
+        slideContainer.one("mouseScroll", mouseMove);
+        var mousewheelevt = (/Firefox/i.test(navigator.userAgent)) ? "DOMMouseScroll" : "mousewheel" //FF doesn't recognize mousewheel as of FF3.x
+        if (document.attachEvent) {
+            document.attachEvent("on" + mousewheelevt, handleScroll)
+        } else if (document.addEventListener) {
+            document.addEventListener(mousewheelevt, handleScroll, false)
+        }
 
-        function mouseMove(event) {
-            changePage(event);
+        function handleScroll(event) {
+            var e = event || window.event;
+
+            if (e.wheelDelta) {
+                slideContainer.trigger("mouseScroll", [(e.wheelDelta < 0)]);
+            } else {
+                slideContainer.trigger("mouseScroll", [(e.detail > 0)]);
+            }
+
+        };
+
+        function mouseMove(e, pageUp) {
+            changePage(pageUp);
             setTimeout(function() {
-                slideContainer.one("mousewheel", mouseMove)
+                slideContainer.one("mouseScroll", mouseMove);
             }, settings.quietPeriod);
         };
+
+
+
 
         /*key event*/
         if (settings.keyboard) {
@@ -59,13 +78,11 @@
                 switch (key) {
                     case 37:
                     case 38:
-                        e.deltaY = 1;
-                        changePage(e);
+                        changePage(false);
                         break;
                     case 39:
                     case 40:
-                        e.deltaY = -1;
-                        changePage(e);
+                        changePage(true);
                         break;
                     default:
                         break;
@@ -77,45 +94,57 @@
         }
 
 
-        function changePage(event) {
-                if (event.deltaY < 0) {
-                    if (slideIndex === maxSlide) {
-                        if (settings.loop) {
-                            slideIndex = 0;
-                            scroller();
-                        }
-                    } else {
-                        slideIndex = slideIndex + 1;
+        function changePage(pageUp) {
+            if (pageUp) {
+                if (slideIndex === maxSlide) {
+                    if (settings.loop) {
+                        slideIndex = 0;
                         scroller();
                     }
                 } else {
-                    if (slideIndex === 0) {
-                        if (settings.loop) {
-                            slideIndex = maxSlide;
-                            scroller();
-                        }
-                    } else {
-                        slideIndex = slideIndex - 1;
+                    slideIndex = slideIndex + 1;
+                    scroller();
+                }
+            } else {
+                if (slideIndex === 0) {
+                    if (settings.loop) {
+                        slideIndex = maxSlide;
                         scroller();
                     }
+                } else {
+                    slideIndex = slideIndex - 1;
+                    scroller();
                 }
             }
-            /*go to the right page*/
+        };
+        //go to the right page
         function scroller() {
             //pageSelector.children("li").eq(slideIndex).addClass("cur").siblings().removeClass("cur");
-            slideContainer.css({
-                "transition": "transform " + settings.animationTime,
-                "transform": "translateY(-" + (slideIndex * 100) + "%)"
-            });
-            // invoke animation in the target function
             var targetSlide = $(slides[slideIndex]);
-            if (targetSlide.attr("data-slideanimation")) {
-                var functionName = targetSlide.attr("data-slideanimation"),
+            if (targetSlide.attr("data-beforeSlideShow")) {
+                var functionName = targetSlide.attr("data-beforeSlideShow"),
                     fn = window[functionName];
                 if (typeof fn === 'function') {
                     fn.call(targetSlide);
                 }
             }
+            slideContainer.css({
+                "transition": "transform " + settings.animationTime,
+                "transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)"
+            });
+            if (hasPageSelector) {
+                $(settings.pageSelectorID + " li:nth-child(" + (slideIndex + 1) + ") a").addClass('active');
+                $(settings.pageSelectorID + " li:nth-child(" + (slideIndex + 1) + ")").siblings().children("a").removeClass('active');
+            }
+            // invoke animation in the target function
+            if (targetSlide.attr("data-afterSlideShow")) {
+                var functionName = targetSlide.attr("data-afterSlideShow"),
+                    fn = window[functionName];
+                if (typeof fn === 'function') {
+                    fn.call(targetSlide);
+                }
+            }
+
         };
     }
 
