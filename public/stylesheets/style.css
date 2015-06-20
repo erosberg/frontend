@@ -94,15 +94,12 @@ a {
 
 .slide {
     height: 100%;
+    position: relative;
 }
 
-#slide1 {
-    background-color: #3a3;
-}
+#slide1 {}
 
-#slide3 {
-    background-color: #33d;
-}
+#slide3 {}
 
 .textBlock p {
     margin: 0;

@@ -3,11 +3,11 @@ extends layout
 block content
   .main
     #slideContainer
-      .slide#slide1
+      .slide#slide1(data-beforeshow="slide1Before",data-aftershow="slide1After")
         .textBlock
           p
             您还认为前端只是切图和网页编辑吗？
-      .slide#slide2
+      .slide#slide2(data-beforeshow="slide2Before",data-aftershow="slide2After")
         .textBlock
           p
             内涵丰富却布局混乱，访客望而却步
@@ -129,3 +129,17 @@ block content
     $("#slideContainer").simplePageScroll({
       pageSelectorID: "slide-btn"
     });
+    function slide1Before() {
+      console.log(this);
+      $("p",this).css("color","red");
+    };
+    function slide1After() {
+      $("p",this).css("color","blue");
+    };
+    function slide2Before() {
+      console.log(this);
+      $("p",this).hide();
+    };
+    function slide2After() {
+      $("p",this).show("slow");
+    };
