@@ -129,9 +129,16 @@
                 }
             }
             slideContainer.css({
-                "transition": "transform " + settings.animationTime,
-                "animation-timing-function": "ease - in",
-                "transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)"
+                "-webkit-transition": "1s ease-in-out",
+                "-moz-transition": "1s ease-in-out",
+                "-o-transition": "1s ease-in-out",
+                "-ms-transition": "1s ease-in-out",
+                "transition": "1s ease-in-out",
+                "transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-webkit-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-ms-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-o-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)",
+                "-moz-transform": "translate3d(0,-" + (slideIndex * 100) + "%,0)"
             });
             if (hasPageSelector) {
                 $(settings.pageSelectorID + " li:nth-child(" + (slideIndex + 1) + ") a").addClass('active');

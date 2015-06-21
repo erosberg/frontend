@@ -4,9 +4,15 @@ block content
   .main
     #slideContainer
       .slide#slide1(data-beforeshow="slide1Before",data-aftershow="slide1After")
+        #sea1
+        #sea2
+        #iceberg
+          img(src="images/iceberg.png")
         .textBlock
           p
-            您还认为前端只是切图和网页编辑吗？
+            |您还认为前端只是切图和网页编辑吗？
+            br
+            |那不过是冰山一角
       .slide#slide2(data-beforeshow="slide2Before",data-aftershow="slide2After")
         .textBlock
           p
@@ -129,15 +135,7 @@ block content
     $("#slideContainer").simplePageScroll({
       pageSelectorID: "slide-btn"
     });
-    function slide1Before() {
-      console.log(this);
-      $("p",this).css("color","red");
-    };
-    function slide1After() {
-      $("p",this).css("color","blue");
-    };
     function slide2Before() {
-      console.log(this);
       $("p",this).hide();
     };
     function slide2After() {
