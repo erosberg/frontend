@@ -411,3 +411,23 @@ a {
     margin: 0 auto;
     text-align: left;
 }
+
+.errorPage {
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(00, 99, 77, 0.8);
+    position: absolute;
+    display: table;
+    text-align: center;
+}
+
+.errorPage h1 {
+    margin: 0;
+}
+
+.page404 {
+    height: 50%;
+    display: table-cell;
+    vertical-align: middle;
+}

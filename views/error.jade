@@ -1,6 +1,8 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  .errorPage
+    .page404
+      h1= message
+      h1= error.status
+      p 那些找不到的网页就像忘记的故事，也许并不重要。
