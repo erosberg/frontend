@@ -121,6 +121,13 @@
         function scroller() {
             //pageSelector.children("li").eq(slideIndex).addClass("cur").siblings().removeClass("cur");
             var targetSlide = $(slides[slideIndex]);
+            if (settings.doBeforeEach) {
+                var functionName = settings.doBeforeEach,
+                    fn = window[functionName];
+                if (typeof fn === 'function') {
+                    fn.call(targetSlide);
+                }
+            }
             if (targetSlide.attr("data-beforeshow")) {
                 var functionName = targetSlide.attr("data-beforeshow"),
                     fn = window[functionName];
@@ -147,6 +154,13 @@
             // invoke animation in the target function
             if (targetSlide.attr("data-aftershow")) {
                 var functionName = targetSlide.attr("data-aftershow"),
+                    fn = window[functionName];
+                if (typeof fn === 'function') {
+                    fn.call(targetSlide);
+                }
+            }
+            if (settings.doAfterEach) {
+                var functionName = settings.doAfterEach,
                     fn = window[functionName];
                 if (typeof fn === 'function') {
                     fn.call(targetSlide);

@@ -8,21 +8,101 @@
     color: #009977;
 }
 
-html,
-body {
+html {
+    font: 16px "Lucida Grande", Helvetica, Arial, sans-serif;
     width: 100%;
     height: 100%;
 }
 
 body {
-    padding-top: 50px;
+    width: 100%;
+    height: 100%;
     margin: 0px;
     text-align: center;
-    font: 36px "Lucida Grande", Helvetica, Arial, sans-serif;
     background: #f1f1f1;
     position: relative;
     z-index: 1000;
     overflow: hidden;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+    body {
+        padding-top: 50px;
+    }
+    .nav {
+        height: 50px;
+    }
+    .nav li {
+        line-height: 50px;
+        font-size: 1.5em;
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+    .textBlock {
+        font-size: 2.5em;
+    }
+    #slide4 .textBlock p {
+        font-size: 0.8em;
+        text-align: center;
+        margin: 1em auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    body {
+        padding-top: 30px;
+    }
+    .nav {
+        height: 30px;
+    }
+    .nav li {
+        line-height: 30px;
+        font-size: 1.2em;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+    .textBlock {
+        font-size: 1.2em;
+    }
+    #iceberg>img {
+        width: 250px;
+    }
+    #slide4 .textBlock p {
+        font-size: 1em;
+        text-align: center;
+        margin: 1em auto;
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    body {
+        padding-top: 20px;
+    }
+    .nav {
+        height: 20px;
+    }
+    .nav li {
+        line-height: 20px;
+        font-size: 0.8em;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .textBlock {
+        font-size: 1em;
+    }
+    #iceberg>img {
+        width: 250px;
+    }
+    #slide4 .textBlock p {
+        font-size: 0.8em;
+        text-align: center;
+        margin: 0.8em auto;
+    }
 }
 
 a {
@@ -32,7 +112,6 @@ a {
 
 .nav {
     width: 100%;
-    height: 50px;
     top: 0;
     position: fixed;
     z-index: 1030;
@@ -48,10 +127,7 @@ a {
 }
 
 .nav li {
-    font-size: 0.5em;
-    height: 100%;
     display: inline-block;
-    padding: 5px;
 }
 
 .nav a {
@@ -70,13 +146,6 @@ a {
     color: #444;
     cursor: default;
 }
-
-@media screen and (min-width: 480px) {
-    .nav li {
-        padding-left: 30px;
-        padding-right: 30px;
-    }
-}
 /* slides */
 
 .main,
@@ -88,6 +157,7 @@ a {
 
 .slide {
     height: 100%;
+    width: 100%;
     position: relative;
 }
 /* slide selector*/
@@ -139,14 +209,19 @@ a {
     z-index: 20;
     position: absolute;
     display: table;
+    text-align: center;
     height: 100%;
     width: 100%;
 }
 
-#slide1 .textBlock p {
+.textBlock p {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.textWrapper {
     display: table-cell;
     vertical-align: middle;
-    line-height: 40px;
 }
 
 @keyframes sea1 {
@@ -240,11 +315,99 @@ a {
     animation-iteration-count: infinite;
 }
 
-@media (max-width: 480px) {
-    .textBlock p {
-        font-size: 0.5em;
+#badDesign {
+    height: 30%;
+}
+
+@keyframes typing {
+    from {
+        width: 0;
     }
-    #iceberg>img {
-        width: 250px;
+}
+
+@keyframes blink-caret {
+    50% {
+        border-color: transparent;
     }
+}
+
+#slide3 .textBlock {
+    background-image: url(/images/tank.png);
+    background-size: 100% 100%;
+}
+
+#t1 {
+    border-right: .1em solid;
+    width: 20em;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 5s steps(20, end), blink-caret .5s step-end infinite alternate;
+}
+
+#t2 {
+    border-right: .1em solid;
+    width: 14em;
+    white-space: nowrap;
+    overflow: hidden;
+    animation: typing 3s steps(14, end), blink-caret .5s step-end infinite alternate;
+}
+
+#logoSchools {
+    max-width: 80%;
+    max-height: 50%;
+    margin: 5%;
+}
+
+.logos {
+    width: 100%;
+    height: 60%;
+}
+
+.logos img {
+    display: block;
+    margin: 0 auto;
+    max-width: 80%;
+    max-height: 30%;
+}
+
+#slide8 .textBlock {
+    z-index: 15;
+    position: absolute;
+}
+
+#growth {
+    position: absolute;
+    width: 100%;
+    height: 90%;
+    left: 0;
+    z-index: 14;
+}
+
+#slide8 {
+    background-color: rgba(00, 99, 77, 0.1);
+}
+
+#slide9 {
+    background-color: rgba(00, 99, 77, 0.25);
+}
+
+#slide10 {
+    background-color: rgba(00, 99, 77, 0.5);
+}
+
+.pageNormal {
+    height: 100%;
+    overflow: scroll;
+}
+
+.contact,
+.about {
+    margin-bottom: 10%;
+}
+
+.centerLeft {
+    line-height: 150%;
+    max-width: 50%;
+    margin: 0 auto;
+    text-align: left;
 }
