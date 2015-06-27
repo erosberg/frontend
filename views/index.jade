@@ -120,18 +120,21 @@ block content
   script(type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js")
   script(type="text/javascript" src="/javascripts/simplePageScroll.min.js")
   script.
+    var t_timeout;
     $("#slideContainer").simplePageScroll({
       pageSelectorID: "slide-btn",
       doBeforeEach:"resetID"
     });
     function resetID(fromPage,toPage){
-      if(toPage===3){
+      if(fromPage===2){
         if($("#t1").length){
+          console.log("now");
           $("#t1").attr("id","t_1").hide();
         }
         if($("#t2").length){
           $("#t2").attr("id","t_2").hide();
         }
+        clearTimeout(t_timeout);
       }
       if(fromPage===0){
         setTimeout(function(){
@@ -160,7 +163,7 @@ block content
     };
     function slide3After() {
       $("#t_1",this).attr("id","t1").show();
-      setTimeout(function(){$("#t_2").show().attr("id","t2");},5000);
+      t=setTimeout(function(){$("#t_2").show().attr("id","t2");},5000);
     };
     function slide5Before() {
       $(".textBlock",this).animate({
