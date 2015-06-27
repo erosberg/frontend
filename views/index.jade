@@ -3,10 +3,10 @@ extends layout
 block content
   .main
     #slideContainer
-      .slide#slide1(data-beforeshow="slide1Before",data-aftershow="slide1After")
-        #sea1
-        #sea2
-        #iceberg
+      .slide#slide1(data-beforeshow="slide1Before")
+        #sea1.sea1
+        #sea2.sea2
+        #iceberg.iceberg
           img(src="images/iceberg.png")
         .textBlock
           .textWrapper
@@ -124,16 +124,30 @@ block content
       pageSelectorID: "slide-btn",
       doBeforeEach:"resetID"
     });
-    function resetID(){
-      if($("#t1").length){
-        $("#t1").attr("id","t_1").hide();
+    function resetID(fromPage,toPage){
+      if(toPage===3){
+        if($("#t1").length){
+          $("#t1").attr("id","t_1").hide();
+        }
+        if($("#t2").length){
+          $("#t2").attr("id","t_2").hide();
+        }
       }
-      if($("#t2").length){
-        $("#t2").attr("id","t_2").hide();
-
+      if(fromPage===0){
+        setTimeout(function(){
+          $("#sea1").removeClass("sea1");
+          $("#sea2").removeClass("sea2");
+          $("#iceberg").removeClass("iceberg");
+        },1000);
+        
       }
-
-    }
+    };
+    function slide1Before() {
+      $("#sea1").addClass("sea1");
+      $("#sea2").addClass("sea2");
+      $("#iceberg").addClass("iceberg");
+    };
+    
     function slide2Before() {
       $(".textBlock",this).hide();
     };

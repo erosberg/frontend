@@ -53,6 +53,14 @@ img {
         text-align: center;
         margin: 1em auto;
     }
+    #slide9 .textBlock p {
+        font-size: 0.8em;
+        text-align: center;
+        margin: 0.8em auto;
+    }
+    #slide5 .textBlock p {
+        font-size: 0.8em;
+    }
 }
 
 @media only screen and (max-width: 767px) {
@@ -80,6 +88,14 @@ img {
         text-align: center;
         margin: 1em auto;
     }
+    #slide9 .textBlock p {
+        font-size: 0.8em;
+        text-align: center;
+        margin: 1em auto;
+    }
+    #slide5 .textBlock p {
+        font-size: 0.8em;
+    }
 }
 
 @media only screen and (max-width: 479px) {
@@ -106,6 +122,14 @@ img {
         font-size: 0.8em;
         text-align: center;
         margin: 0.8em auto;
+    }
+    #slide9 .textBlock p {
+        font-size: 0.6em;
+        text-align: center;
+        margin: 0.6em auto;
+    }
+    #slide5 .textBlock p {
+        font-size: 0.4em;
     }
 }
 
@@ -282,7 +306,7 @@ a {
     }
 }
 
-#sea1 {
+.sea1 {
     z-index: 10;
     bottom: 0;
     position: absolute;
@@ -296,7 +320,7 @@ a {
     animation-iteration-count: infinite;
 }
 
-#sea2 {
+.sea2 {
     z-index: 12;
     bottom: 0px;
     position: absolute;
@@ -310,7 +334,7 @@ a {
     animation-iteration-count: infinite;
 }
 
-#iceberg {
+.iceberg {
     z-index: 11;
     bottom: 0px;
     position: absolute;
@@ -337,7 +361,9 @@ a {
 
 #slide3 .textBlock {
     background-image: url(/images/tank.png);
-    background-size: 100% 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: bottom;
 }
 
 #t1 {
